@@ -1,16 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   printf_test.c                                      :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: jcheron <jcheron@student.42.fr>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/19 15:08:38 by jcheron           #+#    #+#             */
-/*   Updated: 2024/10/29 21:23:43 by jcheron          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
-
 #include "ft_printf.h"
 #include "libft.h"
 
@@ -35,13 +22,11 @@ void	print_color(char *s, int color)
 void my_pf_return(int ret)
 {
 	printf(" --- ft_printf return : %d\n", ret);
-
 }
 
 void pf_return(int ret)
 {
 	printf(" --- printf return : %d\n", ret);
-
 }
 
 void ft_printline(void)
@@ -49,11 +34,11 @@ void ft_printline(void)
 	printf("\n-------------------------------------------------\n\n");
 }
 
-void run_single_test(char flag, char *res)
+int run_single_test(char flag, char *res)
 {
-	int		my_return;
-	int		printf_return;
-	int nb = 0;
+	int my_return, printf_return, nb = 0;
+	int diff_ko = 0;
+
 	ft_printline();
 	switch (flag)
 	{
@@ -100,96 +85,122 @@ void run_single_test(char flag, char *res)
 			printf_return = printf("%u", ft_atoi(res));
 			pf_return(printf_return);
 			break;
-
-
 	}
-	my_return == printf_return ? print_color("DIFF OK", 1) : print_color("DIFF KO", 2);
-
+	if (my_return == printf_return)
+	{
+		print_color("DIFF OK", 1);
+	}
+	else
+	{
+		print_color("DIFF KO", 2);
+		diff_ko = 1;
+	}
+	return diff_ko;
 }
 
-
-void	run_test(void)
+void run_test(int *diff_ko_count)
 {
-	int *ptr = 0 ;
+	int result;
 	ft_printline();
 	print_color("ft_printf tester", 3);
 	ft_printline();
 
 	print_color("Tests for c flag :", 3);
-
-	run_single_test('c', "W");
-	run_single_test('c', "T");
+	result = run_single_test('c', "W");
+	*diff_ko_count += result;
+	result = run_single_test('c', "T");
+	*diff_ko_count += result;
 
 	ft_printline();
 
 	print_color("Tests for s flag :", 3);
-
-	run_single_test('s', "Hello, World!");
-	run_single_test('s', "Le gras, c'est la vie !");
+	result = run_single_test('s', "Hello, World!");
+	*diff_ko_count += result;
+	result = run_single_test('s', "Le gras, c'est la vie !");
+	*diff_ko_count += result;
 
 	ft_printline();
 
 	print_color("Tests for d flag :", 3);
-
-	run_single_test('d', "42");
-	run_single_test('d', "-42");
+	result = run_single_test('d', "42");
+	*diff_ko_count += result;
+	result = run_single_test('d', "-42");
+	*diff_ko_count += result;
 
 	ft_printline();
 
 	print_color("Tests for % flag :", 3);
-
-	run_single_test('%', "%");
+	result = run_single_test('%', "%");
+	*diff_ko_count += result;
 
 	ft_printline();
 
 	print_color("Tests for x flag :", 3);
-
-	run_single_test('x', "-1");
-	run_single_test('x', "42");
+	result = run_single_test('x', "-1");
+	*diff_ko_count += result;
+	result = run_single_test('x', "42");
+	*diff_ko_count += result;
 
 	ft_printline();
 
 	print_color("Tests for X flag :", 3);
-
-	run_single_test('X', "-1");
-	run_single_test('X', "42");
+	result = run_single_test('X', "-1");
+	*diff_ko_count += result;
+	result = run_single_test('X', "42");
+	*diff_ko_count += result;
 
 	ft_printline();
 
 	print_color("Tests for u flag :", 3);
-
-	run_single_test('u', "-1");
-	run_single_test('u', "42");
+	result = run_single_test('u', "-1");
+	*diff_ko_count += result;
+	result = run_single_test('u', "42");
+	*diff_ko_count += result;
 
 	ft_printline();
 
 	print_color("Tests for p flag :", 3);
 
-	ft_printline();
-
 	int my_return, printf_return;
 	int test = 42;
-	int *ptr2 = &test;
+	int *ptr = NULL;
+	// int *ptr2 = &test;
 
 	my_return = ft_printf("%p", ptr);
 	my_pf_return(my_return);
 	printf_return = printf("%p", ptr);
 	pf_return(printf_return);
-	my_return == printf_return ? print_color("DIFF OK", 1) : print_color("DIFF KO", 2);
+	if (my_return != printf_return)
+		(*diff_ko_count)++;
 
 	ft_printline();
 
-	my_return = ft_printf("%p", ptr2);
+	my_return = ft_printf("%p", &test);
 	my_pf_return(my_return);
-	printf_return = printf("%p", ptr2);
+	printf_return = printf("%p", &test);
 	pf_return(printf_return);
-	my_return == printf_return ? print_color("DIFF OK", 1) : print_color("DIFF KO", 2);
+	if (my_return != printf_return)
+		(*diff_ko_count)++;
 
 	ft_printline();
 }
 
-int	main(void)
+int main(void)
 {
-	run_test();
-	return (0);
+	int diff_ko_count = 0;
+
+	run_test(&diff_ko_count);
+
+	if (diff_ko_count == 0)
+		print_color("All tests passed successfully!", 1);
+	else
+	{
+		char message[100];
+		snprintf(message, sizeof(message), "Tests completed with %d DIFF KO(s)", diff_ko_count);
+		print_color(message, 2);
+	}
+
+	ft_printline();
+
+	return 0;
 }
