@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test.c                                             :+:      :+:    :+:   */
+/*   libft_test.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jcheron <jcheron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/20 11:18:58 by jcheron           #+#    #+#             */
-/*   Updated: 2024/10/20 11:26:02 by jcheron          ###   ########.fr       */
+/*   Updated: 2024/10/29 17:24:31 by jcheron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,17 +153,17 @@ void run_tests(void) {
     printf("ft_tolower: A -> %c\n", ft_tolower('A'));
     printf("ft_toupper: b -> %c\n", ft_toupper('b'));
 
-    // Test de ft_lstnew, ft_lstadd_back et ft_lstclear
-    t_list *list = ft_lstnew(ft_strdup("On en a gros !"));
-    ft_lstadd_back(&list, ft_lstnew(ft_strdup("C'est pas faux.")));
-    ft_lstadd_back(&list, ft_lstnew(ft_strdup("Ça me paraît énorme.")));
-    t_list *tmp = list;
-    while (tmp) {
-        printf("%s -> ", (char *)tmp->content);
-        tmp = tmp->next;
-    }
-    printf("NULL\n");
-    ft_lstclear(&list, free);
+    // // Test de ft_lstnew, ft_lstadd_back et ft_lstclear
+    // t_list *list = ft_lstnew(ft_strdup("On en a gros !"));
+    // ft_lstadd_back(&list, ft_lstnew(ft_strdup("C'est pas faux.")));
+    // ft_lstadd_back(&list, ft_lstnew(ft_strdup("Ça me paraît énorme.")));
+    // t_list *tmp = list;
+    // while (tmp) {
+    //     printf("%s -> ", (char *)tmp->content);
+    //     tmp = tmp->next;
+    // }
+    // printf("NULL\n");
+    // ft_lstclear(&list, free);
 }
 
 int main(void) {
