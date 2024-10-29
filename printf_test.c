@@ -6,7 +6,7 @@
 /*   By: jcheron <jcheron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 15:08:38 by jcheron           #+#    #+#             */
-/*   Updated: 2024/10/29 18:26:16 by jcheron          ###   ########.fr       */
+/*   Updated: 2024/10/29 21:23:43 by jcheron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,22 +114,6 @@ void	run_test(void)
 	ft_printline();
 	print_color("ft_printf tester", 3);
 	ft_printline();
-
-	// print_color("\nTest without any flag :\n", 3);
-	// my_return = ft_printf("Aled !");
-	// printf(" --- My printf return : %d\n", my_return);
-	// printf_return = printf("Aled !");
-	// printf(" --- Printf return    : %d \n", printf_return);
-	// my_return == printf_return ? print_color("DIFF OK", 1) : print_color("DIFF KO", 2);
-
-	// printf("%s", line);
-	// print_color("\nTest for c flag :\n", 3);
-	// my_return = ft_printf("%c", 'W');
-	// printf(" --- My printf return : %d\n", my_return);
-	// printf_return = printf("%c", 'W');
-	// printf(" --- Printf return    : %d \n", printf_return);
-	// my_return == printf_return ? print_color("DIFF OK", 1) : print_color("DIFF KO", 2);
-	// printf("%s", line);
 
 	print_color("Tests for c flag :", 3);
 
